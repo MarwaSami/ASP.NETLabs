@@ -1,0 +1,36 @@
+﻿@using Models;
+@{
+    Layout = "_Layout";
+    ViewProduct product = ViewData["product"] as ViewProduct;
+
+}
+<h1>@product.Name</h1>
+<h2>@product.Price</h2>
+<p>@product.Description</p>
+
+<div id="carouselExample" class="carousel slide">
+    <div class="carousel-inner">
+        @if (product.ImagePaths.Count > 0)
+        {
+            @foreach (var attach in @product.ImagePaths)
+            {
+                <div class="carousel-item active">
+                    <img src="/Images/@attach" class="d-block w-100" alt="...">
+                </div>
+            }
+        }
+        else
+        {
+            <h2 class="lead">No Image for this product</h2>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+</div>

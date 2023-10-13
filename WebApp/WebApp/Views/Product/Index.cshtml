@@ -1,0 +1,56 @@
+﻿@using Models
+@{
+    Layout = "_Layout";
+
+    List<ViewProduct> products = ViewData["products"] as List<ViewProduct>;
+
+}
+@if (ViewData["msq"] != null)
+{
+    <script>
+        alert(@ViewData["msq"]);
+    </script>
+}
+<div>
+    <a class="btn btn-Primary" asp-controller="Product" asp-action="add">Add Product</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Image</th>
+            <th scope="col">Details</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ViewProduct product in products)
+        {
+            <tr>
+                <th scope="row">@product.ID</th>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.CategoryName</td>
+                @if (product.ImagePaths.Count > 0)
+                {
+                   
+                    
+                        <td><img src="/Images/@product.ImagePaths.FirstOrDefault()" /></td>
+                    
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td><a href="~/Product/GetDetails/@product.ID">View Details</a></td>
+                <td>
+                    <a href="~/Product/Delete/@product.ID"><i class="fa-solid fa-trash"></i></a>
+                    <a href="~/Product/Edit/@product.ID"><i class="fa-solid fa-pen-to-square"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
